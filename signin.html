@@ -1,17 +1,129 @@
-<html>
-  <head> </head>
-  <body>
-    
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In | The Carbon Ledger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Sign In Card -->
+    <div class="login-card">
+        <h2>Sign In</h2>
+
+        <form>
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" required>
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <p class="forgot">Forgot Password?</p>
+        <p class="signup">New here? <span>Create an Account</span></p>
+    </div>
+
+</body>
 </html>
 <style>
-  .body{
-   background-image: url("background(2).png");  
-  background-size: cover;                   
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed; 
-   margin:0;
-  }
-  
-</style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Background Image */
+body {
+    height: 100vh;
+    background-image: url("background(2)"); /* your eco image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Dark Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* Login Card */
+.login-card {
+    position: relative;
+    background: white;
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+/* Heading */
+.login-card h2 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.login-card label {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Inputs */
+.login-card input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Button */
+.login-card button {
+    width: 100%;
+    padding: 12px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    background: #256628;
+}
+
+/* Links */
+.forgot {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+}
+
+.signup {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.signup span {
+    color: #2e7d32;
+    font-weight: bold;
+    cursor: pointer;
+}
+  </style>
