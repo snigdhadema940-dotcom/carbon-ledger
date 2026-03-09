@@ -89,9 +89,6 @@ color:#333;
 <label>🚗 Distance traveled by car per month (km)</label>
 <input type="number" id="car" placeholder="Example: 200">
 
-<label>🚌 Distance traveled by public transport per month (km)</label>
-<input type="number" id="bus" placeholder="Example: 100">
-
 <label>⚡ Electricity used per month (kWh)</label>
 <input type="number" id="electricity" placeholder="Example: 250">
 
@@ -112,18 +109,17 @@ color:#333;
 function calculateCarbon(){
 
 let car = document.getElementById("car").value || 0;
-let bus = document.getElementById("bus").value || 0;
 let electricity = document.getElementById("electricity").value || 0;
 let gas = document.getElementById("gas").value || 0;
 let people = document.getElementById("people").value || 1;
 
-// emission factors
+
 let carEmission = car * 0.21;
-let busEmission = bus * 0.1;
+
 let electricityEmission = electricity * 0.85;
 let gasEmission = gas * 42;
 
-let total = carEmission + busEmission + electricityEmission + gasEmission;
+let total = carEmission + electricityEmission + gasEmission;
 
 let perPerson = total / people;
 
