@@ -23,10 +23,45 @@
             <input type="password" placeholder="Enter your password" required>
              <label>Re-enter Password</label>
             <input type="password" placeholder="Re-enter your password" required>
-            <button type="submit">Sign In</button>
-            
-        </form>
+            <p id="errorMessage" style="color: red; font-size: 12px; margin-bottom: 10px; display: none;"></p>
     
+    <button type="submit">Sign In</button>
+</form>
+
+<script>
+    const loginForm = document.getElementById('loginForm');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const errorDisplay = document.getElementById('errorMessage');
+
+    loginForm.addEventListener('submit', function(event) {
+        let messages = [];
+        
+        // 1. Length Check (e.g., minimum 8 characters)
+        if (password.value.length < 8) {
+            messages.push("Password must be at least 8 characters long.");
+        }
+
+        // 2. Special Character Check
+        // This regex looks for at least one character that isn't a letter or number
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+        if (!specialCharRegex.test(password.value)) {
+            messages.push("Password must contain at least one special character.");
+        }
+
+        // 3. Match Check
+        if (password.value !== confirmPassword.value) {
+            messages.push("Passwords do not match.");
+        }
+
+        // If there are errors, stop the form from submitting
+        if (messages.length > 0) {
+            event.preventDefault(); // Prevents the page from redirecting
+            errorDisplay.innerText = messages.join(" ");
+            errorDisplay.style.display = "block";
+        }
+    });
+</script>
     </div>
 
 </body>
