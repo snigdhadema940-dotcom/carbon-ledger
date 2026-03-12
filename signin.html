@@ -1,247 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <title>Sign In | The Carbon Ledger</title>
+
 <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
-
-<!-- Navbar -->
-<div class="rectangle">
-
-<img src="carbon.logo.png" class="logo">
-
-<div class="text">The Carbon Ledger...</div>
-
-<nav class="nav">
-<a href="index.html" class="nav-link">Home</a>
-<a href="aboutUs.html" class="nav-link">About Us</a>
-<a href="#" class="nav-link">Contribute</a>
-<a href="signin.html" class="nav-link signup">Sign Up</a>
-</nav>
-
-</div>
-
-<!-- Overlay -->
-<div class="overlay"></div>
-
-<!-- Login Card -->
-<div class="login-card">
-
-<h2>Sign In</h2>
-
-<form action="index.html">
-
-<label>Name</label>
-<input type="text" required>
-
-<label>Email</label>
-<input type="email" placeholder="John15@gmail.com" required>
-<label>Password</label>
-<input type="password"
-placeholder="Enter your password"
-pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*@).{8,}$"
-title="Password must be at least 8 characters, include one capital letter, one number, and @"
-required>
-<button type="submit">Sign In</button>
-
-</form>
-
-<p class="signup-text">
-New here? <a href="signup.html">Create an Account</a>
-</p>
-
-</div>
-
-</body>
-</html>
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: Arial, sans-serif;
+font-family:Arial;
 }
 
-/* Background */
 body{
 height:100vh;
 background-image:url("background(2).png");
 background-size:cover;
 background-position:center;
-background-repeat:no-repeat;
-background-attachment:fixed;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-padding-top:120px;
-position:relative;
 }
 
-/* Navbar */
-.rectangle{
-background-color:green;
-height:120px;
-width:100%;
+/* overlay */
 
-position:fixed;
-top:0;
-left:0;
-
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-padding-left:70px;
-padding-right:100px;
-
-z-index:1000;
-}
-
-/* Logo */
-.logo{
-height:100px;
-width:100px;
-}
-
-/* Title */
-.text{
-font-size:40px;
-font-weight:1000;
-color:white;
-font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Navigation */
-.nav{
-display:flex;
-gap:40px;
-}
-
-/* Nav links */
-.nav-link{
-text-decoration:none;
-font-size:18px;
-font-weight:600;
-color:white;
-font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-position:relative;
-display:inline-block;
-}
-
-/* Hover effect */
-.nav-link::after{
-content:"";
-position:absolute;
-left:0;
-bottom:-3px;
-width:0;
-height:3px;
-background-color:aqua;
-transition:width 0.3s ease;
-}
-
-.nav-link:hover::after{
-width:100%;
-}
-
-/* Sign up button */
-.signup{
-padding:10px 20px;
-background-color:white;
-color:green;
-border-radius:10px;
-}
-
-/* Overlay */
 .overlay{
 position:absolute;
 inset:0;
 background:rgba(0,0,0,0.45);
+z-index:0;
 }
 
-/* Login Card */
-.login-card{
+/* center login */
+
+.page-center{
+display:flex;
+justify-content:center;
+align-items:center;
+height:85vh;
 position:relative;
-
-width:350px;
-padding:30px;
-border-radius:12px;
-
-background:rgba(255,255,255,0.2);
-backdrop-filter:blur(10px);
--webkit-backdrop-filter:blur(10px);
-
-border:1px solid rgba(255,255,255,0.3);
-
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
 z-index:1;
 }
 
-/* Heading */
+/* login card */
+
+.login-card{
+background:white;
+width:360px;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
 .login-card h2{
 text-align:center;
 color:#2e7d32;
 margin-bottom:20px;
 }
 
-/* Labels */
-.login-card label{
-font-size:14px;
-color:#333;
-}
-
-/* Inputs */
 .login-card input{
 width:100%;
 padding:10px;
 margin:8px 0 15px;
-
 border-radius:6px;
 border:1px solid #ccc;
 }
 
-/* Button */
-.login-card button{
+button{
 width:100%;
 padding:12px;
-
 background:#2e7d32;
 color:white;
-
 border:none;
 border-radius:6px;
-
 font-size:16px;
 cursor:pointer;
 }
 
-.login-card button:hover{
+button:hover{
 background:#256628;
 }
 
-/* Links */
-.forgot{
-text-align:center;
-margin-top:12px;
-font-size:14px;
-color:#555;
-cursor:pointer;
-}
-
-.signup-text{
+.signup{
 text-align:center;
 margin-top:10px;
-font-size:14px;
+color:white;
 }
 
-.signup-text a{
-color:#2e7d32;
-font-weight:bold;
-text-decoration:none;
+.signup a{
+color:#a5ffb2;
 }
+
 </style>
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<!-- NAVBAR -->
+
+<div class="rectangle">
+
+<img src="carbon.logo.png" class="logo">
+
+<div class="text">
+<center>The Carbon Ledger...</center>
+</div>
+
+<nav class="nav">
+
+<a href="index.html" class="nav-link">Home</a>
+<a href="aboutUs.html" class="nav-link">About Us</a>
+<a href="contributor.html" class="nav-link">Contribute</a>
+<a href="signin.html" class="nav-link signin">Sign In</a>
+
+</nav>
+
+</div>
+
+<!-- LOGIN SECTION -->
+
+<div class="page-center">
+
+<div class="login-card">
+
+<h2>Sign In</h2>
+
+<form action="/login" method="POST">
+
+<label>Email</label>
+<input type="email" name="email" required>
+
+<label>Password</label>
+<input type="password" name="password" required>
+
+<button type="submit">Sign In</button>
+
+</form>
+
+<p class="signup">
+Don't have an account?
+<a href="signup.html">Create one</a>
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
