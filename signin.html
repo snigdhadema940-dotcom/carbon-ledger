@@ -39,10 +39,12 @@
 
 <label>Email</label>
 <input type="email" placeholder="John15@gmail.com" required>
-
 <label>Password</label>
-<input type="password" placeholder="Enter your password" required>
-
+<input type="password"
+placeholder="Enter your password"
+pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*@).{8,}$"
+title="Password must be at least 8 characters, include one capital letter, one number, and @"
+required>
 <button type="submit">Sign In</button>
 
 </form>
