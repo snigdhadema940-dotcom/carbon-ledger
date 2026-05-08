@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sign Up | The Carbon Ledger</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+height:100vh;
+background-image:url("background(2).png");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.45);
+}
+
+.login-card{
+position:relative;
+background:white;
+width:360px;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+z-index:1;
+}
+
+.login-card h2{
+text-align:center;
+color:#2e7d32;
+margin-bottom:20px;
+}
+
+.login-card input{
+width:100%;
+padding:10px;
+margin:8px 0 15px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#256628;
+}
+
+#errorMessage{
+color:red;
+font-size:13px;
+display:none;
+}
+
+.signup{
+text-align:center;
+margin-top:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="login-card">
+
+<h2>Create Account</h2>
+
+<form id="signupForm" action="/signup" method="POST">
+
+<label>Name</label>
+<input type="text" name="name" required>
+
+<label>Email</label>
+<input type="email" name="email" required>
+
+<label>Password</label>
+<input type="password" id="password" name="password" required>
+
+<label>Confirm Password</label>
+<input type="password" id="confirmPassword" required>
+
+<p id="errorMessage"></p>
+
+<button type="submit">Sign Up</button>
+
+</form>
+
+<p class="signup">
+Already have an account?
+<a href="signin.html">Sign In</a>
+</p>
+
+</div>
+
+<script>
+
+const form=document.getElementById("signupForm")
+const password=document.getElementById("password")
+const confirmPassword=document.getElementById("confirmPassword")
+const error=document.getElementById("errorMessage")
+
+form.addEventListener("submit",function(e){
+
+let messages=[]
+
+if(password.value.length<8){
+messages.push("Password must be at least 8 characters.")
+}
+
+const special=/[!@#$%^&*(),.?":{}|<>]/
+
+if(!special.test(password.value)){
+messages.push("Password must contain a special character.")
+}
+
+if(password.value!==confirmPassword.value){
+messages.push("Passwords do not match.")
+}
+
+if(messages.length>0){
+e.preventDefault()
+error.innerText=messages.join(" ")
+error.style.display="block"
+}
+
+})
+
+</script>
+
+</body>
+</html>
