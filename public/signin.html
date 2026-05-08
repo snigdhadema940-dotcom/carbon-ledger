@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Sign In | The Carbon Ledger</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+height:100vh;
+background-image:url("background(2).png");
+background-size:cover;
+background-position:center;
+}
+
+/* overlay */
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.45);
+z-index:0;
+}
+
+/* center login */
+
+.page-center{
+display:flex;
+justify-content:center;
+align-items:center;
+height:85vh;
+position:relative;
+z-index:1;
+}
+
+/* login card */
+
+.login-card{
+background:white;
+width:360px;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+/* Navbar */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Sign In button */
+.signin {
+    background: #2e7d32;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* User dropdown */
+.user-dropdown {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Dropdown menu */
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    padding: 10px;
+}
+
+/* Show on hover */
+.user-dropdown:hover .user-dropdown-menu {
+    display: block;
+}
+
+/* Logout button */
+.user-dropdown-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    display: block;
+}
+
+.user-dropdown-menu a:hover {
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+.login-card h2{
+text-align:center;
+color:#2e7d32;
+margin-bottom:20px;
+}
+
+.login-card input{
+width:100%;
+padding:10px;
+margin:8px 0 15px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#256628;
+}
+
+.signup{
+text-align:center;
+margin-top:10px;
+color:black;
+}
+
+.signup a{
+color:green;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+
+<div class="rectangle">
+
+<img src="carbon.logo.png" class="logo">
+
+<div class="text">
+<center>The Carbon Ledger</center>
+</div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="aboutUs.html" class="nav-link">About Us</a>
+  <a href="contributor.html" class="nav-link">Contribute</a>
+
+  <!-- Sign In -->
+  <a href="signin.html" id="authLink" class="nav-link signin">Sign In</a>
+
+  <!-- User Icon -->
+  <div class="user-dropdown" id="userSection" style="display:none;">
+    👤
+    <div class="user-dropdown-menu" id="dropdownMenu">
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</nav>
+</div>
+
+
+<div class="page-center">
+
+<div class="login-card">
+
+<h2>Sign In</h2>
+
+<form action="/login" method="POST" autocomplete="off">
+
+<label>Email</label>
+<input type="email" name="email" required>
+
+<label>Password</label>
+<input type="password" name="password" required>
+
+<button type="submit">Sign In</button>
+
+</form>
+
+<p class="signup">
+Don't have an account?
+<a href="signup.html">Create one</a>
+</p>
+
+</div>
+
+</div>
+
+</body>
+<script>
+fetch("/check-auth")
+.then(res => res.json())
+.then(data => {
+    const authLink = document.getElementById("authLink");
+    const userSection = document.getElementById("userSection");
+
+    if (data.loggedIn) {
+        authLink.style.display = "none";
+        userSection.style.display = "inline-block";
+    } else {
+        authLink.style.display = "inline-block";
+        userSection.style.display = "none";
+    }
+});
+
+</script>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carbon Footprint Calculator</title>
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f9f6;
+}
+/* Navbar */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Sign In button */
+.signin {
+    background: #2e7d32;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* User dropdown */
+.user-dropdown {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Dropdown menu */
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    padding: 10px;
+}
+
+/* Show on hover */
+.user-dropdown:hover .user-dropdown-menu {
+    display: block;
+}
+
+/* Logout button */
+.user-dropdown-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    display: block;
+}
+
+.user-dropdown-menu a:hover {
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:600px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2{
+color:#2e7d32;
+text-align:center;
+}
+
+.nav {
+  display: flex;
+  gap: 40px;
+  margin-top: 100px;
+}
+
+.rectangle{
+    background-color: green;
+     height: 120px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding-left: 70px;
+     padding-right: 100px;
+}
+
+.logo{
+    height:100px;
+    width:100px;
+}
+
+.text {
+  font-size: 40px;
+  font-weight: 1000;
+  color:white;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-right: 70px;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position:relative;
+  display:inline-block;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 3px;
+  background-color: aqua;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width:100%;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:15px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+margin-top:20px;
+width:100%;
+padding:12px;
+background:#2e7d32;
+color:white;
+border:none;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+.result{
+margin-top:25px;
+font-size:18px;
+text-align:center;
+color:#333;
+}
+
+.history-box{
+border:1px solid #ccc;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+background:#f9f9f9;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="rectangle">
+<img src="carbon.logo.png" class="logo">
+<div class="text">The Carbon Ledger</div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="aboutUs.html" class="nav-link">About Us</a>
+  <a href="contributor.html" class="nav-link">Contribute</a>
+
+  <!-- Sign In -->
+  <a href="signin.html" id="authLink" class="nav-link signin">Sign In</a>
+
+  <!-- User Icon -->
+  <div class="user-dropdown" id="userSection" style="display:none;">
+    👤
+    <div class="user-dropdown-menu" id="dropdownMenu">
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</nav>
+</div>
+</header>
+
+<div class="container">
+
+<h2>Calculate Your Carbon Emissions</h2>
+
+<label>🚗 Distance traveled by vehicle per month (km)</label>
+<input type="number" id="car" placeholder="Example: 200">
+
+<label>⚡ Electricity used per month (kWh)</label>
+<input type="number" id="electricity" placeholder="Example: 250">
+
+<label>🔥 LPG cylinders used per month</label>
+<input type="number" id="gas" placeholder="Example: 1">
+
+<label>👨‍👩‍👧 Number of people in the household</label>
+<input type="number" id="people" placeholder="Example: 4">
+
+<button onclick="calculateCarbon()">Calculate Carbon Emission</button>
+
+<div class="result" id="result"></div>
+
+
+<h3 style="margin-top:30px;">📜 Previous Calculations</h3>
+<div id="history"></div>
+
+</div>
+
+<script>
+
+
+
+
+
+fetch("/check-auth")
+.then(res => res.json())
+.then(data => {
+    const authLink = document.getElementById("authLink");
+    const userSection = document.getElementById("userSection");
+
+    if (!data.loggedIn) {
+        alert("Please login to access this page");
+        window.location.href = "signin.html";
+        return;
+    }
+
+    authLink.style.display = "none";
+    userSection.style.display = "inline-block";
+
+    loadHistory();
+});
+
+function calculateCarbon(){
+
+let car = Number(document.getElementById("car").value) || 0;
+let electricity = Number(document.getElementById("electricity").value) || 0;
+let gas = Number(document.getElementById("gas").value) || 0;
+let people = Number(document.getElementById("people").value) || 1;
+
+let carEmission = car * 0.21;
+let electricityEmission = electricity * 0.85;
+let gasEmission = gas * 42;
+
+let total = carEmission + electricityEmission + gasEmission;
+let perPerson = total / people;
+
+let level = "";
+if (total < 200) level = "🌱 Low Emission";
+else if (total < 500) level = "⚖️ Moderate Emission";
+else level = "🚨 High Emission";
+
+let suggestions = [];
+
+if (car > 300) suggestions.push("🚗 Use public transport or carpool");
+if (electricity > 300) suggestions.push("⚡ Reduce electricity usage");
+if (gas > 1) suggestions.push("🔥 Reduce LPG usage");
+
+if (suggestions.length === 0) {
+  suggestions.push("✅ Great! Your emissions are under control.");
+}
+
+document.getElementById("result").innerHTML =
+"🌍 Total: <b>" + total.toFixed(2) + " kg CO₂</b><br>" +
+"👤 Per Person: <b>" + perPerson.toFixed(2) + " kg CO₂</b><br><br>" +
+"<b>" + level + "</b><br><br>" +
+"<b>💡 Suggestions:</b><br>" +
+suggestions.join("<br>");
+
+fetch("/save-carbon", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ car, electricity, gas, people, total })
+})
+.then(res => res.text())
+.then(data => {
+    console.log(data);
+    loadHistory();
+});
+
+}
+
+function loadHistory() {
+
+  const container = document.getElementById("history");
+  container.innerHTML = "Loading...";
+
+  fetch("/history")
+    .then(res => res.json())
+    .then(data => {
+
+      container.innerHTML = "";
+
+      if(data.length === 0){
+        container.innerHTML = "<p>No previous calculations</p>";
+        return;
+      }
+
+      data.reverse().forEach(item => {
+        const div = document.createElement("div");
+        div.className = "history-box";
+
+        div.innerHTML = `
+          <p><b>Car:</b> ${item.car}</p>
+          <p><b>Electricity:</b> ${item.electricity}</p>
+          <p><b>Gas:</b> ${item.gas}</p>
+          <p><b>People:</b> ${item.people}</p>
+          <p><b>Total:</b> ${item.total} kg CO₂</p>
+          <p><small>${new Date(item.date).toLocaleString()}</small></p>
+        `;
+
+        container.appendChild(div);
+      });
+    });
+}
+
+
+</script>
+
+</body>
+</html>

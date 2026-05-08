@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Carbon Ledger</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f9f6;
+}
+.rectangle{
+    background-color: green;
+     height: 120px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding-left: 70px;
+     padding-right: 100px;
+}
+.logo{
+    height:100px;
+    width:100px;
+}
+.text {
+  font-size: 40px;
+  font-weight: 1000;
+  color:white;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-right: 70px;
+}
+.nav {
+  display: flex;
+  gap: 40px;
+  margin-top: 100px;
+  
+
+
+}
+
+
+.nav-link {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position:relative;
+  display:inline-block;
+}
+
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 3px;
+  background-color: aqua;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width:100%;
+  
+}
+
+
+.signup {
+  padding: 10px 20px;
+  background-color:white;
+  color: green;
+  border-radius: 10px;
+}
+
+.signup:hover {
+  background-color: white;
+}
+
+
+
+header{
+background:#008000;
+color:white;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header h1{
+margin-left:20px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:15px;
+font-weight:bold;
+}
+
+nav a:hover{
+text-decoration:underline;
+}
+
+/* About Section */
+
+.about{
+max-width:1100px;
+margin:auto;
+padding:60px 20px;
+text-align:center;
+}
+
+.about h2{
+color:#2e7d32;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about p{
+font-size:18px;
+line-height:1.7;
+color:#444;
+}
+/* Navbar */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Sign In button */
+.signin {
+    background: #2e7d32;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* User dropdown */
+.user-dropdown {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Dropdown menu */
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    padding: 10px;
+}
+
+/* Show on hover */
+.user-dropdown:hover .user-dropdown-menu {
+    display: block;
+}
+
+/* Logout button */
+.user-dropdown-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    display: block;
+}
+
+.user-dropdown-menu a:hover {
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Cards */
+
+.about-cards{
+display:flex;
+gap:30px;
+margin-top:40px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+width:280px;
+}
+
+.card h3{
+color:#2e7d32;
+}
+
+</style>
+</head>
+
+<body>
+ <div>
+        <div class="rectangle">
+       <img src="carbon.logo.png" class="logo">
+       <div class="text"><center>The Carbon Ledger</center>
+       </div>
+       <nav class="nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="aboutUs.html" class="nav-link">About Us</a>
+  <a href="contributor.html" class="nav-link">Contribute</a>
+
+  <!-- Sign In -->
+  <a href="signin.html" id="authLink" class="nav-link signin">Sign In</a>
+
+  <!-- User Icon -->
+  <div class="user-dropdown" id="userSection" style="display:none;">
+    👤
+    <div class="user-dropdown-menu" id="dropdownMenu">
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</nav>
+    </div>
+
+<section class="about">
+
+<h2>About Carbon Ledger 🌱</h2>
+
+<p>
+Carbon Ledger helps individuals understand and track their carbon footprint.
+By measuring everyday activities such as travel, electricity use, and lifestyle
+choices, our platform provides insight into how these actions impact the environment.
+</p>
+
+<div class="about-cards">
+
+<div class="card">
+<h3>🌍 Our Mission</h3>
+<p>
+To raise awareness about carbon emissions and help people make
+sustainable decisions that protect our planet.
+</p>
+</div>
+
+<div class="card">
+<h3>📊 What We Do</h3>
+<p>
+We provide tools that calculate carbon emissions from daily activities
+so users can track and reduce their environmental impact.
+</p>
+</div>
+
+<div class="card">
+<h3>🌱 Our Vision</h3>
+<p>
+A future where everyone actively monitors their carbon footprint
+and contributes toward a greener planet.
+</p>
+</div>
+
+</div>
+
+</section>
+
+</body>
+<script>
+  fetch("/check-auth")
+.then(res => res.json())
+.then(data => {
+    const authLink = document.getElementById("authLink");
+    const userSection = document.getElementById("userSection");
+
+    if (data.loggedIn) {
+        authLink.style.display = "none";
+        userSection.style.display = "inline-block";
+    } else {
+        authLink.style.display = "inline-block";
+        userSection.style.display = "none";
+    }
+});
+
+</script>
+</html>
